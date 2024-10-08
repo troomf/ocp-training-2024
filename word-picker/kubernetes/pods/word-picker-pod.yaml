@@ -7,5 +7,5 @@ metadata:
     custom: "yes"
 spec:
   containers:
-  - image: troomf/word-picker:v1
+  - image: tinmancoding/word-picker:v1
     name: word-picker

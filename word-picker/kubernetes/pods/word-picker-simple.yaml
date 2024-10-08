@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: word-picker-simple
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: word-picker-simple
+  template:
+    metadata:
+      labels:
+        app: word-picker-simple
+    spec:
+      containers:
+      - name: word-picker
+        image: troomf/word-picker:v2.1
+        ports:
+        - containerPort: 5000
