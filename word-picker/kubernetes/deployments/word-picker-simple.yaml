@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: word-picker-simple
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: word-picker-simple
@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: word-picker
-        image: troomf/word-picker:v2.1
+        image: tinmancoding/word-picker:v2.1
         ports:
         - containerPort: 5000
