@@ -4,9 +4,8 @@ metadata:
   name: word-picker-custom
   labels: 
     app: word-picker
-    custom: yes
+    custom: "yes"
 spec:
   containers:
-  - image: tinmancodig/word-picker:v1
+  - image: troomf/word-picker:v1
     name: word-picker
-    
