@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: word-picker-b
+  namespace: word-picker-bc-tf
+spec:
+  type: ClusterIP
+  selector:
+    app: word-picker
+    letter: b
+  ports:
+  - port: 5000
+    protocol: TCP
+    targetPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: word-picker-c
+  namespace: word-picker-bc-tf
+spec:
+  type: ClusterIP
+  selector:
+    app: word-picker
+    letter: c
+  ports:
+  - port: 5000
+    protocol: TCP
+    targetPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: word-picker-bc
+spec:
+  type: ClusterIP
+  selector:
+    app: word-picker
+    letter: c
+  ports:
+  - port: 5000
+    protocol: TCP
+    targetPort: 5000
+
+
+    

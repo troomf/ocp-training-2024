@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: word-picker-a
+  namespace: word-picker-a-tf
+spec:
+  type: ClusterIP
+  selector:
+    app: word-picker
+    letter: a
+  ports:
+  - port: 5000
+    protocol: TCP
+    targetPort: 5000

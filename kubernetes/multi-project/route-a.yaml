@@ -1,0 +1,13 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: word-picker-a
+  namespace: word-picker-a-tf
+spec:
+  host: word-picker-a-word-picker-a-tf.apps.bruno.ocp-training-gcp.yct.hu
+  port:
+    targetPort: 5000
+  to:
+    kind: Service
+    name: word-picker-a
+    weight: 100
