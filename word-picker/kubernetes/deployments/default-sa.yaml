@@ -1,0 +1,12 @@
+apiVersion: v1
+imagePullSecrets:
+- name: default-dockercfg-kk5fh
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2024-10-09T07:28:37Z"
+  name: default
+  namespace: word-picker-tf
+  resourceVersion: "1162599"
+  uid: 0411b25a-b8db-4fa5-a7f3-72ab1979450b
+secrets:
+- name: default-dockercfg-kk5fh
