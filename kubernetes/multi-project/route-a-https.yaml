@@ -1,0 +1,66 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: word-picker-a-https
+  namespace: word-picker-a-tf
+spec:
+  host: word-picker-a-https-word-picker-a-tf.apps.bruno.ocp-training-gcp.yct.hu
+  port:
+    targetPort: 5000
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    certificate: |
+      -----BEGIN CERTIFICATE-----
+      MIIDWzCCAkMCFCAx79gZJVMl3XX4kIqtP1oQCLhCMA0GCSqGSIb3DQEBCwUAMGox
+      CzAJBgNVBAYTAlVTMQswCQYDVQQIDAJDQTEUMBIGA1UEBwwLTG9zIEFuZ2VsZXMx
+      EDAOBgNVBAoMB0V4YW1wbGUxCzAJBgNVBAsMAklUMRkwFwYDVQQDDBB0ZXh0LmV4
+      YW1wbGUuY29tMB4XDTI0MTAxMDEyMDEyNVoXDTI1MTAxMDEyMDEyNVowajELMAkG
+      A1UEBhMCVVMxCzAJBgNVBAgMAkNBMRQwEgYDVQQHDAtMb3MgQW5nZWxlczEQMA4G
+      A1UECgwHRXhhbXBsZTELMAkGA1UECwwCSVQxGTAXBgNVBAMMEHRleHQuZXhhbXBs
+      ZS5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDAEFGqq8kYUkyP
+      bRQEtxNJYPOGP9N4fdVM4r4uDTKdvcy8kJmN2ChWSrbLaOGgrCijDRaXD/JJ6MDH
+      bchwpi8swc9S0T2tRkdFT7umGCl8apATXxk5TgGlk7lA6dsQpBGvrM4gpdoM1CDb
+      ENqJRDOYtPedfhym1VbPDcgW888tSb/SDXWqaN9Mbt7IM+qr4mliJNWh5H/KVnX7
+      ez1CfQbt16TAd1TfUE/UUqsWalRt1/yxHlvmgPiUxEGLIzj4tyigo3m/V5i3FzsD
+      OANFKxLwcU0M3tzDsmQncsF82ErAQAp0p4YIaqY3kEZIBoypzUTOOD8MEHDQfdpK
+      cfrZ71Y1AgMBAAEwDQYJKoZIhvcNAQELBQADggEBAKqM2obHe3u9+Wo0irjR7Dqf
+      6yMB11+G9xK+VBwMwDv4pS/D8T8DnAEYiqA2ZLZL53NgxWfVd7OeoC06azVf2BuE
+      nH/SRiEwXCU/9nq4cfbpRENAaAaIi4eXf1/VTz5EbeDkjYzfLEsYe4XX1k24jMcb
+      LLY5HMx2IuBa3bjWdtHqK5W0kybLPRKHJ9/iPoAc1+Prhf4/kPewhmI3pZWEFG0i
+      AEi+fvLXRzJcJGYTQ932KcIQnKY7NnGDkaXgAFzYgveXubarZPqpq6UHtvtQTTMH
+      aBwMqI3SQGd0LI6FitNhtdlhtsoJlRaCFqW3ZTA6+/ecdLLIzEgHZjuPSkIxPuQ=
+      -----END CERTIFICATE-----
+    key: |
+      -----BEGIN PRIVATE KEY-----
+      MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDAEFGqq8kYUkyP
+      bRQEtxNJYPOGP9N4fdVM4r4uDTKdvcy8kJmN2ChWSrbLaOGgrCijDRaXD/JJ6MDH
+      bchwpi8swc9S0T2tRkdFT7umGCl8apATXxk5TgGlk7lA6dsQpBGvrM4gpdoM1CDb
+      ENqJRDOYtPedfhym1VbPDcgW888tSb/SDXWqaN9Mbt7IM+qr4mliJNWh5H/KVnX7
+      ez1CfQbt16TAd1TfUE/UUqsWalRt1/yxHlvmgPiUxEGLIzj4tyigo3m/V5i3FzsD
+      OANFKxLwcU0M3tzDsmQncsF82ErAQAp0p4YIaqY3kEZIBoypzUTOOD8MEHDQfdpK
+      cfrZ71Y1AgMBAAECggEASR5tWOJpfn7mcrv+IQVprEfirjtiUL7nE4xHBtUzbeYy
+      KZ+LNfsS8DclfC8Dpt2j4t86uGvzu7uGmOXspyY9U3a9bTQHnQ3iWDrQn50XPix7
+      iURtH+nYqqagolvlcGJl8VGCb990MeoYUA4MhLGYSwyqMCUw1zrk/5KpmENdnkmK
+      gGTSh6obuv8ruogKuj3IyvEXD9HIjn3f/+0sMw6qhE5zY+wsmIQllAd+KvELpQdN
+      CyJwC+RljhmGr6q+u8IfYttm3TzzVdsW17GvKXhP/o1Cif9o7kxVs0j6AMvrZL1W
+      i3igM9L31OWAtuBoCW62kciaQ1jWFhUGjkyGqcsWiQKBgQDjS1oTRzHCavE1HMAg
+      YNm2nFkSZg7rirFV6fwk1kh74vrrTGHVcZ60dkczDIO2+u13icHDxkOxLFUhN+F2
+      /OZuJlXzWlWbYosO3x5fG4EMn+Z0rxoYsQMfk7yqundHyDAqi3nfQNk7x8l6+8/p
+      HnzJjwJpd2Fg2AjtnG/NzWUYVwKBgQDYUe1zC6+94Kko8b0+HGeouvuJG9qVFk+r
+      rM7mg11X5N4p/K0vGh/dkQIReFUn51J/4Bjx3G7szW10vI5hFAA5D99kMy9Ay5Cz
+      ThnwtwS7sPU3Dthf3ynxU7hAPBHMZZNHOdrkulxp18i04oTAydBT12cgF90TjWMV
+      z5Hf/TveUwKBgQDGew18WiY0nQhnFeUcIRbc5OjPLToIK4Ox/3KEhG6laE8u2/Nu
+      3Rn2gnaoOFxok/R791qx59dCxvDL4i1Lp4pdU7KooBCzcLj30pSF/tGRQayP5jxG
+      pYSRtYQCHnR8xW5yKHvTHaDVGCBz+aLT8iCMLgqwKGRrmhspyvrC34JRXwKBgGlA
+      89hWh1xMRAK4HOxrxcRDtsAv3VtNT9aobsOah4CMy8yCNYIFpBuawvbdJhIUa//s
+      eja0mwR9sBRs6poxsSoSnw+SGBve8LlN9zE43AS3RZlUj9OWMkJKCgy3LbHWeqLd
+      c7R3OSAG7pGU5iMoD0W8OWFUOy2YTe3+4WurO8YhAoGAM2E2gCuI0ueqg1jPpiYX
+      cLYPboqYw5RUTFwIxw81mtl+8F42AAlMfJ4O0rC4QlPcQHluzS9htmw4zukgbvxX
+      qb8SoZmIUnXIlRRSDc6JdKE9WahisOWAk6iNUIw90we/f9qRP3MDsz0eQWc5Y67R
+      waV8TvlDcCD9suD99eBbzm4=
+      -----END PRIVATE KEY-----
+    termination: edge
+  to:
+    kind: Service
+    name: word-picker-a
+    weight: 100
