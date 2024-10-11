@@ -1,0 +1,117 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: word-picker
+parameters:
+- name: APP_POSTFIX
+  description: This postix is appended to every name and tag.
+  required: true
+- name: CUSTOM_OPTIONS
+  description: Add the words to pick from here separated with whitespace.
+  value: "alpha beta gamma delta epsilon"
+- name: REPLICAS
+  description: Number of replicas to start for the word-picker app.
+  value: "2"
+- name: IMAGE_NAME
+  description: The name of the Container Image to use
+  value: tinmancoding/word-picker
+- name: IMAGE_TAG
+  description: The version tag of the Container Image to use
+  value: v2
+objects:
+- apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    name: word-picker-options-${APP_POSTFIX}
+    labels:
+      app: word-picker-${APP_POSTFIX}
+  data:
+    custom_options.txt: ${CUSTOM_OPTIONS}
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: word-picker-${APP_POSTFIX}
+    labels:
+      app: word-picker-${APP_POSTFIX}
+      app-postfix: ${APP_POSTFIX}
+      component: word-picker
+    annotations:
+      image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"word-picker-${APP_POSTFIX}:deployed"},"fieldPath":"spec.template.spec.containers[?(@.name==\"word-picker\")].image"}]'
+  spec:
+    replicas: ${{REPLICAS}}
+    selector:
+      matchLabels:
+        app: word-picker-${APP_POSTFIX}
+        app-postfix: ${APP_POSTFIX}
+        component: word-picker
+    template:
+      metadata:
+        labels:
+          app: word-picker-${APP_POSTFIX}
+          app-postfix: ${APP_POSTFIX}
+          component: word-picker
+      spec:
+        containers:
+        - name: word-picker
+          image: wardsco/sleep
+          ports:
+          - containerPort: 5000
+          volumeMounts:
+          - name: options-config-map
+            mountPath: /code/config
+          env:
+          - name: OPTIONS_FILE
+            value: /code/config/custom_options.txt
+        volumes:
+        - name: options-config-map
+          configMap:
+            name: word-picker-options-${APP_POSTFIX}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: word-picker-${APP_POSTFIX}
+    labels:
+      app: word-picker-${APP_POSTFIX}
+  spec:
+    type: ClusterIP
+    selector:
+      app: word-picker-${APP_POSTFIX}
+    ports:
+    - port: 5000
+      protocol: TCP
+      targetPort: 5000
+- apiVersion: networking.k8s.io/v1
+  kind: NetworkPolicy
+  metadata:
+    name: word-picker-ingress-${APP_POSTFIX}
+    labels:
+      app: word-picker-${APP_POSTFIX}
+  spec:
+    podSelector:
+      matchLabels:
+        app: word-picker-${APP_POSTFIX}
+    policyTypes:
+    - Ingress
+    ingress:
+    - from:
+      - podSelector: {}
+    - from:
+      - namespaceSelector:
+          matchLabels:
+            network.openshift.io/policy-group: ingress
+- apiVersion: image.openshift.io/v1
+  kind: ImageStream
+  metadata:
+    name: word-picker-${APP_POSTFIX}
+    labels:
+      app: word-picker-${APP_POSTFIX}
+  spec:
+    tags:
+      - name: deployed
+        from:
+          kind: DockerImage
+          name: ${IMAGE_NAME}:${IMAGE_TAG}
+        importPolicy:
+          scheduled: true
+        referencePolicy:
+          type: Local
